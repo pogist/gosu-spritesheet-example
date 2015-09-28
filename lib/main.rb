@@ -7,16 +7,19 @@ class GameWindow < Gosu::Window
     self.caption = "Spritesheet animation example"
 
     @player = Player.new 320, 240
+
+    @key = {kb_left: Gosu::KbLeft,
+            kb_right: Gosu::KbRight,
+            gp_left: Gosu::GpLeft,
+            gp_right: Gosu::GpRight}
   end
 
   def update
-    if Gosu::button_down? Gosu::KbLeft or Gosu::button_down? Gosu::GpLeft then
-      @player.move_left
-      @player.animated = true
+    if Gosu::button_down? @key[:kb_left] or Gosu::button_down? @key[:gp_left] then
+      @player.move :left
     end
-    if Gosu::button_down? Gosu::KbRight or Gosu::button_down? Gosu::GpRight then
-      @player.move_right
-      @player.animated = true
+    if Gosu::button_down? @key[:kb_right] or Gosu::button_down? @key[:gp_right] then
+      @player.move :right
     end
   end
 
@@ -25,11 +28,11 @@ class GameWindow < Gosu::Window
   end
 
   def button_up(id)
-    if id == Gosu::KbLeft or id == Gosu::GpLeft then
-      @player.animated = false 
+    if id == @key[:kb_left] or id == @key[:gp_left] then
+      @player.stop_move
     end
-    if id == Gosu::KbRight or id == Gosu::GpRight then
-      @player.animated = false
+    if id == @key[:kb_right] or id == @key[:gp_right] then
+      @player.stop_move
     end
   end
 end

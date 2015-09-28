@@ -2,38 +2,36 @@ require 'gosu'
 require_relative 'animation'
 
 class Player
-  attr_writer :animated
-
   def initialize(x, y)
     @frames = Gosu::Image.load_tiles 'res/dude.png', 32, 48
     @x, @y = x, y
-
-    @moving_left = Animation.new @frames[0..3], 0.3
-    @moving_right = Animation.new @frames[5..8], 0.3
     
-    @animation = @moving_left
-    @animated = false
+    @move = {:left => Animation.new(@frames[0..3], 0.2),
+             :right => Animation.new(@frames[5..8], 0.2)}
+
+    @movements = {:left => -2.0, :right => 2.0}
+
+    @moving = false
+    @facing = :left
   end
 
   def draw
-    if @animated
-      @animation.start.draw @x, @y, 1
+    if @moving
+      @move[@facing].start.draw @x, @y, 1
     else
-      @animation.stop.draw @x, @y, 1
+      @move[@facing].stop.draw @x, @y, 1
     end
   end
 
-  def move_left
-    @x -= 1.0
+  def move(direction)
+    @x += @movements[direction]
     @x %= 640
-
-    @animation = @moving_left if @animation != @moving_left
+    
+    @facing = direction
+    @moving = true if @moving != true
   end
 
-  def move_right
-    @x += 1.0
-    @x %= 640
-
-    @animation = @moving_right if @animation != @moving_right
+  def stop_move
+    @moving = false if @moving != false
   end
 end
