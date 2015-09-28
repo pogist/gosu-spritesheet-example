@@ -17,11 +17,9 @@ class Player
 
   def draw
     if @animated
-      img = @animation.start
-      img.draw @x, @y, 1
+      @animation.start.draw @x, @y, 1
     else
-      img = @animation.stop
-      img.draw @x, @y, 1
+      @animation.stop.draw @x, @y, 1
     end
   end
 
