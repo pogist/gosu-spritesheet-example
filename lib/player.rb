@@ -25,11 +25,15 @@ class Player
 
   def move_left
     @x -= 1.0
+    @x %= 640
+
     @animation = @moving_left if @animation != @moving_left
   end
 
   def move_right
     @x += 1.0
+    @x %= 640
+
     @animation = @moving_right if @animation != @moving_right
   end
 end
