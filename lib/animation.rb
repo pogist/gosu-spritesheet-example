@@ -7,10 +7,10 @@ class Animation
   end
 
   def start
-    img = @frames[Gosu::milliseconds / @time % @frames.size]
+    @frames[Gosu::milliseconds / @time % @frames.size]
   end
 
   def stop
-    img = @frames[0]
+    @frames[0]
   end
 end
