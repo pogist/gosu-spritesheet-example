@@ -1,3 +1,5 @@
+This is a very very old project (one of my firsts here on github), which inspired me to do [this](https://github.com/pogist/gosu-spritesheet). Please, if you came here, check it out.
+
 # Gosu sprite sheet example
 Simple animation with gosu sprite sheets
 
